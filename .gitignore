@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+/public
+
+# logs and temp files
+npm-debug.log*
+*.log
+.DS_Store # macOS hidden file
+
+# editor and IDE settings
+.vscode/
+.idea/
+
+# environments
+.env
+.env.local
+.env.production
+.env.development
+
+# secrets and credentials
+*.key
+*.pem
+*.p12
+*.crt
+*.cert
