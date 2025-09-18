@@ -1,0 +1,15 @@
+class Invoice:
+    def __init__(self, amount):
+        self.amount = amount
+
+class TaxCalculator:
+    def calculate(self, invoice: Invoice):
+        return invoice.amount * 0.18
+
+class InvoicePrinter:
+    def print(self, invoice: Invoice):
+        print(f"Invoice amount: {invoice.amount}")
+
+class InvoiceRepository:
+    def save(self, invoice: Invoice):
+        print("Saving to database...")
