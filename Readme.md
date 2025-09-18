@@ -9,3 +9,6 @@ I will learn to deploy my complete application to platforms like Vercel or Rende
 
 Cleancode and Practices
 Focusing on writing clean codes according to the priciples and making it efficient
+
+This is to practice merge conflicts
+This is from feature docs
