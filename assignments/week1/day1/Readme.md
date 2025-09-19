@@ -1,0 +1,89 @@
+// Centralized function for area calculation
+//example of DRY (Don't Repeat Yourself) principle-----------------------------------
+function calculateArea(shape, area) {
+console.log(`The area of the ${shape} is ${area}.`);
+return area;
+}
+
+function calculateRectangleArea(length, width) {
+const area = length \* width;
+return calculateArea('rectangle', area);
+}
+
+function calculateSquareArea(side) {
+const area = side \* side;
+return calculateArea('square', area);
+}
+
+calculateRectangleArea(10, 5);
+calculateSquareArea(7);
+//---------------------------------------------Open/Closed Principle Example----------------------------------------------------
+
+// We are now open for extension.add any shape you want!
+const rectangle = {
+width: 10,
+height: 5,
+getArea: function() {
+return this.width \* this.height;
+}
+};
+
+const circle = {
+radius: 3,
+getArea: function() {
+return Math.PI _ this.radius _ this.radius;
+}
+};
+
+// We can add a new shape without touching the function below.
+const triangle = {
+base: 8,
+height: 4,
+getArea: function() {
+return (this.base \* this.height) / 2;
+}
+};
+
+// This function is now closed for modification.
+function calculateTotalArea(shapes) {
+let totalArea = 0;
+for (const shape of shapes) {
+totalArea += shape.getArea();
+}
+return totalArea;
+}
+
+const shapes = [rectangle, circle, triangle];
+
+console.log(`Total area is: ${calculateTotalArea(shapes)}`);
+
+//---------------------------------------------Single Responsibility Principle Example----------------------------------------------------
+
+// Responsibility: Holds invoice data
+class Invoice {
+constructor(amount) {
+this.amount = amount;
+}
+}
+
+// Responsibility: Calculates tax
+class TaxCalculator {
+calculate(invoice) {
+return invoice.amount \* 0.18; // 18% tax
+}
+}
+
+// Responsibility: Prints the invoice
+class InvoicePrinter {
+print(invoice) {
+console.log(`Invoice amount: $${invoice.amount}`);
+}
+}
+
+// Responsibility: Saves the invoice
+class InvoiceRepository {
+save(invoice) {
+
+console.log("Saving invoice to the database...");
+}
+}
