@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>recipe finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fafafa;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        input {
+            width: 70%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        #results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .recipe {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .recipe img {
+            width: 100%;
+            height: auto;
+        }
+        .recipe p {
+            font-weight: bold;
+            padding: 15px;
+            margin: 0;
+        }
+        #message {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Find a Recipe</h1>
+        <input type="text" id="search-input" placeholder="enter an ingredient (e.g. chicken)">
+        <button id="search-btn">find recipes</button>
+        <div id="message"></div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const searchBtn = document.getElementById('search-btn');
+        const searchInput = document.getElementById('search-input');
+        const resultsDiv = document.getElementById('results');
+        const messageDiv = document.getElementById('message');
+
+        searchBtn.addEventListener('click', searchRecipes);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                searchRecipes();
+            }
+        });
+
+        async function searchRecipes() {
+            const ingredient = searchInput.value.trim();
+            if (!ingredient) {
+                messageDiv.textContent = 'please enter an ingredient.';
+                return;
+            }
+
+            resultsDiv.innerHTML = '';
+            messageDiv.textContent = 'looking for recipes...';
+
+            const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+
+                if (data.meals) {
+                    messageDiv.textContent = '';
+                    displayRecipes(data.meals);
+                } else {
+                    messageDiv.textContent = 'no recipes found for that. try something else?';
+                }
+
+            } catch(err) {
+                messageDiv.textContent = 'oops, something went wrong. try again later.';
+            }
+        }
+
+        function displayRecipes(meals) {
+            for(let meal of meals) {
+                const recipeDiv = document.createElement('div');
+                recipeDiv.className = 'recipe';
+
+                recipeDiv.innerHTML = `
+                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                    <p>${meal.strMeal}</p>
+                `;
+                resultsDiv.appendChild(recipeDiv);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
