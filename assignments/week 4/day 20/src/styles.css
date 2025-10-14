@@ -1,0 +1,17 @@
+:root { --bg: #f8fafc; --card: #fff; --muted: #6b7280; --accent: #2563eb }
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:#111827}
+.container{max-width:980px;margin:20px auto;padding:16px}
+h1{margin:0 0 12px 0;font-size:20px}
+.controls{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.input{flex:1;padding:8px;border:1px solid #d1d5db;border-radius:6px}
+.btn{padding:8px 12px;border-radius:6px;border:none;background:var(--accent);color:white;cursor:pointer}
+.top-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.dashboard{background:var(--card);padding:12px;border-radius:8px;border:1px solid #e6e9ee;min-width:220px}
+.dashboard h3{margin:0 0 8px 0}
+.filterbar{background:var(--card);padding:8px;border-radius:8px;border:1px solid #e6e9ee;margin-bottom:8px}
+.search{margin-top:8px}
+.todo-list{list-style:none;padding:0;margin:0}
+.todo-item{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:6px;background:var(--card);margin-bottom:8px;border:1px solid #e6e9ee}
+.todo-item.done .text{opacity:0.6;text-decoration:line-through}
+.category{font-size:12px;padding:4px 6px;border-radius:6px;background:#eef2ff;color:#3730a3;margin-left:8px}
